@@ -1,0 +1,11 @@
+requests>=2.28.1
+beautifulsoup4>=4.11.1
+urllib3>=1.26.12
+colorama>=0.4.6
+pyyaml>=6.0
+dnspython>=2.2.1
+cryptography>=38.0.1
+lxml>=4.9.1
+tqdm>=4.64.1
+selenium>=4.5.0  # Pour les screenshots dans le reporter
+Pillow>=9.2.0    # Pour le traitement d'images 
