@@ -14,7 +14,7 @@ setup(
     description="Un framework d'analyse de vulnérabilités web",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/webhunterx/webhunterx",
+    url="https://github.com/lestalou/webhunterx",
     packages=find_packages(),
     include_package_data=True,
     package_data={
